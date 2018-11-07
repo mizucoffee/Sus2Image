@@ -1,0 +1,15 @@
+{
+  "name": "Sus2Image",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/KawakawaRitsuki/Sus2Image",
+  "author": "Ritsuki Goto <develop@mizucoffee.net>",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "express-fileupload": "^1.0.0",
+    "pug": "^2.0.3",
+    "sus-2-image": "^1.0.2"
+  }
+}

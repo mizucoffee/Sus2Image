@@ -1,0 +1,24 @@
+html
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(name="format-detection", content="telephone=no")
+
+    title #{title}
+
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.20/css/uikit.min.css")
+
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.20/js/uikit.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.20/js/uikit-icons.min.js")
+  body
+    div.uk-section
+      div.uk-container.uk-container-expand
+        h1
+          a(href="/") Sus2Image β
+        h2= meta.TITLE
+        a(href="#bottom") 一番下（譜面の最初）から見る
+        div
+          for image in images.reverse()
+            img(src=image, style="display: block;")
+        div#bottom

@@ -1,0 +1,55 @@
+html
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(name="format-detection", content="telephone=no")
+
+    title #{title}
+
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.20/css/uikit.min.css")
+
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.20/js/uikit.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.20/js/uikit-icons.min.js")
+
+    script(type="text/javascript").
+      window.onload = () => {
+        const file = document.getElementById('file')
+        const path = document.getElementById('path')
+        const submit = document.getElementById('submit')
+
+        file.addEventListener('change',e => {
+          if (file.files[0]) {
+            submit.disabled = false
+            path.value = file.files[0].name
+          } else {
+            submit.disabled = true
+            path.value = ''
+          }
+        })
+      }
+  body
+    div.uk-section
+      div.uk-container.uk-container-expand
+        h1
+          a(href="/") Sus2Image β
+        h2 概要
+        p sus（Seaurchin譜面）ファイルから画像に変換します。
+          br
+          | このサービスは実験版です。いつサービスが終了するかイマイチ分かりません。バグが高確率であります。
+          br
+          | 既知のバグ以外で明らかにおかしい画像になる場合は@kawakawaritsukiまでリプライをください。
+          br
+          | 尚、SLIDE/AIR HOLDのベジェ曲線には仕様上対応していません。制御点が不可視点と同等の扱いになります。
+        p 現在画像は40小節毎に分割されるようになっています。ダウンロードする際はお気をつけください（ダウンロード機能も付けたいですね）
+        h2 既知のバグ
+        p なんか真横に移動するSLIDEはぐちゃぐちゃになりやすい傾向です。
+          br
+          | 調べときます。
+        h2 アップロード
+        form(action="/convert", method="post", enctype="multipart/form-data")
+          input(type="text",placeholder="Select file" , disabled)#path.uk-input.uk-form-width-medium
+          div(uk-form-custom)
+            input(name="sus", type="file", accept=".sus")#file
+            button(type="button").uk-button.uk-button-default SELECT
+          button(type="submit", style="margin-left: 4px;", disabled)#submit.uk-button.uk-button-primary SUBMIT
