@@ -17,6 +17,10 @@ app.get('/', (req, res) => {
   res.render('index')
 })
 
+app.get('/convert', async (req, res) => {
+  res.redirect('/')
+})
+
 app.post('/convert', async (req, res) => {
   console.log(req.files)
   if(!req.hasOwnProperty('files')) res.redirect('/')
