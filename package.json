@@ -10,6 +10,6 @@
     "express": "^4.16.4",
     "express-fileupload": "^1.0.0",
     "pug": "^2.0.3",
-    "sus-2-image": "^1.0.2"
+    "sus-2-image": "^1.0.4"
   }
 }
