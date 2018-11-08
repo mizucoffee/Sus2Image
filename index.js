@@ -2,7 +2,7 @@ const express = require('express')
 const fileUpload = require('express-fileupload')
 const bodyParser = require('body-parser')
 const SusAnalyzer = require('sus-analyzer')
-const sus2image = require('../sus-2-image/index')
+const sus2image = require('sus-2-image')
 const app = express()
 
 app.use(bodyParser.urlencoded({ limit:'100mb',extended: true }))
