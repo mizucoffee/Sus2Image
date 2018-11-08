@@ -17,8 +17,21 @@ html
         h1
           a(href="/") Sus2Image β
         h2= meta.TITLE
-        a(href="#bottom") 一番下（譜面の最初）から見る
-        div
-          for image in images.reverse()
-            img(src=image, style="display: block;")
+        div(style="width: 100%; overflow-x: scroll;")
+          div(style=`display: flex; width: ${Math.ceil(images.length/3) * 93}px; align-items: flex-end;`)
+            - images = images.reverse()
+            - for (let i = 0; i < Math.ceil(images.length/3); i++)
+              div(style="margin-right: 4px; width: 93px; height: fit-content;")
+                - if(i*3+2 < images.length)
+                  div(style="width: 93px; margin-left: auto;")
+                    span(style="font-size: 12px; color: #000; text-decoration: underline; padding-right: 2px;")= i*3+3
+                    img(src=images[i*3+2], style="vertical-align: bottom; width: 68px;")
+                - if(i*3+1 < images.length)
+                  div(style="width: 93px; margin-left: auto;")
+                    span(style="font-size: 12px; color: #000; text-decoration: underline; padding-right: 2px;")= i*3+2
+                    img(src=images[i*3+1], style="vertical-align: bottom; width: 68px;")
+                - if(i*3 < images.length)
+                  div(style="width: 93px; margin-left: auto;")
+                    span(style="font-size: 12px; color: #000; text-decoration: underline; padding-right: 2px;")= i*3+1
+                    img(src=images[i*3], style="vertical-align: bottom; width: 68px;")
         div#bottom

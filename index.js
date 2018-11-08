@@ -2,7 +2,7 @@ const express = require('express')
 const fileUpload = require('express-fileupload')
 const bodyParser = require('body-parser')
 const SusAnalyzer = require('sus-analyzer')
-const sus2image = require('sus-2-image')
+const sus2image = require('../sus-2-image/index')
 const app = express()
 
 app.use(bodyParser.urlencoded({ limit:'100mb',extended: true }))
@@ -22,11 +22,10 @@ app.get('/convert', async (req, res) => {
 })
 
 app.post('/convert', async (req, res) => {
-  console.log(req.files)
   if(!req.hasOwnProperty('files')) res.redirect('/')
   const sus = req.files.sus.data.toString()
   const meta = SusAnalyzer.getMeta(sus)
-  const images = await sus2image.getImages(sus)
+  const measures = await sus2image.getMeasures(sus)
 
-  res.render('show',{meta: meta, images: images})
+  res.render('show',{meta: meta, images: measures})
 })
