@@ -11,14 +11,32 @@ html
 
     script(src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.20/js/uikit.min.js")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.20/js/uikit-icons.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js")
+
+    script.
+      window.onload = () => {
+        html2canvas(document.getElementById('score'),{
+          onrendered: canvas => {
+            document.getElementById("download").href = canvas.toDataURL()
+            document.getElementById('box').classList.add('box')
+            document.getElementById('score').classList.add('pad')
+          }
+        })
+      }
+    style(type="text/css").
+      .pad {padding: 16px;}
+      .box {
+        overflow-x: scroll;
+        width: 100%;
+      }
   body
     div.uk-section
       div.uk-container.uk-container-expand
         h1
           a(href="/") Sus2Image β
         h2= meta.TITLE
-        div(style="width: 100%; overflow-x: scroll;")
-          div(style=`display: flex; width: ${Math.ceil(images.length/3) * 93}px; align-items: flex-end;`)
+        div#box
+          div#score(style=`display: flex; width: ${Math.ceil(images.length/3) * 97}px; align-items: flex-end;`).pad
             - images = images.reverse()
             - for (let i = 0; i < Math.ceil(images.length/3); i++)
               div(style="margin-right: 4px; width: 93px; height: fit-content;")
@@ -34,4 +52,4 @@ html
                   div(style="width: 93px; margin-left: auto;")
                     span(style="font-size: 12px; color: #000; text-decoration: underline; padding-right: 2px;")= i*3+1
                     img(src=images[i*3], style="vertical-align: bottom; width: 68px;")
-        div#bottom
+        a(download=`${meta.TITLE}.png`, style="margin-left: 4px; margin-top: 4px;")#download.uk-button.uk-button-primary Download
