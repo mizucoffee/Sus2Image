@@ -1,17 +1,6 @@
 html
   head
-    meta(charset="utf-8")
-    meta(http-equiv="X-UA-Compatible", content="IE=edge")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    meta(name="format-detection", content="telephone=no")
-
-    title #{title}
-
-    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.20/css/uikit.min.css")
-
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.20/js/uikit.min.js")
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.20/js/uikit-icons.min.js")
-
+    include head.pug
     script(type="text/javascript").
       window.onload = () => {
         const file = document.getElementById('file')
@@ -31,8 +20,8 @@ html
   body
     div.uk-section
       div.uk-container.uk-container-expand
-        h1
-          a(href="/") Sus2Image β
+        a(href="/")
+          img(src="/sus2image.svg",style="height: 64px;")
         h2 概要
         p susファイル（Seaurchin譜面ファイル）から画像に変換します。
           br

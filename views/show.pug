@@ -1,17 +1,6 @@
 html
   head
-    meta(charset="utf-8")
-    meta(http-equiv="X-UA-Compatible", content="IE=edge")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    meta(name="format-detection", content="telephone=no")
-
-    title #{title}
-
-    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.20/css/uikit.min.css")
-
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.20/js/uikit.min.js")
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.20/js/uikit-icons.min.js")
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js")
+    include head.pug
 
     script.
       window.onload = () => {
@@ -32,8 +21,8 @@ html
   body
     div.uk-section
       div.uk-container.uk-container-expand
-        h1
-          a(href="/") Sus2Image β
+        a(href="/")
+          img(src="/sus2image.svg",style="height: 64px;")
         h2= meta.TITLE
         div#box
           div#score(style=`display: flex; width: ${Math.ceil(images.length/3) * 97}px; align-items: flex-end;`).pad
@@ -52,4 +41,4 @@ html
                   div(style="width: 93px; margin-left: auto;")
                     span(style="font-size: 12px; color: #000; text-decoration: underline; padding-right: 2px;")= i*3+1
                     img(src=images[i*3], style="vertical-align: bottom; width: 68px;")
-        a(download=`${meta.TITLE}.png`, style="margin-left: 4px; margin-top: 4px;")#download.uk-button.uk-button-primary Download
+        a(download=`${meta.TITLE}.png`, style="margin-left: 4px; margin-top: 4px;")#download.uk-button.uk-button-primary 画像を保存
