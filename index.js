@@ -13,19 +13,13 @@ app.set('view engine', 'pug')
 
 const server = app.listen(process.env.PORT || 3000, () => console.log("Node.js is listening to PORT:" + server.address().port))
 
-app.get('/', (req, res) => {
-  res.render('index')
-})
-
-app.get('/convert', async (req, res) => {
-  res.redirect('/')
-})
-
+app.get('/',        (req, res) => res.render('index'))
+app.get('/convert', (req, res) => res.redirect('/'))
 app.post('/convert', async (req, res) => {
-  if(!req.hasOwnProperty('files')) res.redirect('/')
+  if(!req.hasOwnProperty('files')) return res.redirect('/')
   const sus = req.files.sus.data.toString()
   const meta = SusAnalyzer.getMeta(sus)
-  const measures = await sus2image.getMeasures(sus)
+  const images = await sus2image.getPNGs(sus)
 
-  res.render('show',{meta: meta, images: measures})
+  res.render('show',{meta: meta, images: images.map(i => "data:image/png;base64," + i.toString('base64')) })
 })

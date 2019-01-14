@@ -22,23 +22,19 @@ html
     div.uk-section
       div.uk-container.uk-container-expand
         a(href="/")
-          img(src="/sus2image.svg",style="height: 64px;")
+          img(src="/sus2image.png",style="height: 128px;")
         h2= meta.TITLE
         div#box
-          div#score(style=`display: flex; width: ${Math.ceil(images.length/3) * 97}px; align-items: flex-end;`).pad
-            - images = images.reverse()
+          div#score(style=`display: flex; width: ${Math.ceil(images.length/3) * 93}px; align-items: flex-end;`).pad
             - for (let i = 0; i < Math.ceil(images.length/3); i++)
               div(style="margin-right: 4px; width: 93px; height: fit-content;")
                 - if(i*3+2 < images.length)
                   div(style="width: 93px; margin-left: auto;")
-                    span(style="font-size: 12px; color: #000; text-decoration: underline; padding-right: 2px;")= i*3+3
                     img(src=images[i*3+2], style="vertical-align: bottom; width: 68px;")
                 - if(i*3+1 < images.length)
                   div(style="width: 93px; margin-left: auto;")
-                    span(style="font-size: 12px; color: #000; text-decoration: underline; padding-right: 2px;")= i*3+2
                     img(src=images[i*3+1], style="vertical-align: bottom; width: 68px;")
                 - if(i*3 < images.length)
                   div(style="width: 93px; margin-left: auto;")
-                    span(style="font-size: 12px; color: #000; text-decoration: underline; padding-right: 2px;")= i*3+1
                     img(src=images[i*3], style="vertical-align: bottom; width: 68px;")
         a(download=`${meta.TITLE}.png`, style="margin-left: 4px; margin-top: 4px;")#download.uk-button.uk-button-primary 画像を保存
