@@ -4,15 +4,17 @@ html
 
     script.
       window.onload = () => {
-        html2canvas(document.getElementById('box'),{
-          onrendered: canvas => {
-            document.getElementById("download").href = canvas.toDataURL()
-            document.getElementById('box').classList.add('box')
-            document.getElementById('loading').style.display = "none"
-            document.getElementById('logo').style.display = "none"
-            document.getElementById('genby').style.display = "none"
-          }
-        })
+        setTimeout(() => {
+          html2canvas(document.getElementById('box'),{
+            onrendered: canvas => {
+              document.getElementById("download").href = canvas.toDataURL()
+              document.getElementById('box').classList.add('box')
+              document.getElementById('loading').style.display = "none"
+              document.getElementById('logo').style.display = "none"
+              document.getElementById('genby').style.display = "none"
+            }
+          })
+        }, 100)
       }
     style(type="text/css").
       .pad {padding: 16px;}
