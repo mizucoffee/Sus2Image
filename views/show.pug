@@ -6,8 +6,6 @@ html
       window.onload = () => {
         document.getElementById('loading').style.display = "none"
         document.getElementById('download').onclick = () => {
-          console.log('down')
-
           document.getElementById('logo').style.display = "block"
           document.getElementById('genby').style.display = "inline"
           document.getElementById('download').disabled = true
@@ -22,6 +20,7 @@ html
               document.getElementById('logo').style.display = "none"
               document.getElementById('genby').style.display = "none"
               document.getElementById('box').classList.add('box')
+              document.getElementById('download').disabled = false
             }
           })
         }
@@ -39,7 +38,7 @@ html
       div.uk-container.uk-container-expand
         a(href="/")
           img(src="/sus2image.png",style="height: 128px;")
-        div#box(style="width: fit-content; margin-top: 16px; background: #ffffff;").pad
+        div#box(style="width: fit-content; margin-top: 16px; background: #ffffff;").pad.box
           span(style="font-size: 28pt;")#title= meta.TITLE
           span(style="font-size: 16pt; margin-left: 16px;")= meta.DESIGNER
           img(src="/sus2image.png",style="margin-top: 5px; height: 28pt; float: right; display: none;")#logo
