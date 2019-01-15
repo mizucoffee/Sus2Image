@@ -13,10 +13,11 @@ html
           html2canvas(document.getElementById('box'),{
             onrendered: canvas => {
               const a = document.createElement('a');
-              a.title = "my title text";
-              a.href = canvas.toDataURL();
+              a.href = canvas.toDataURL()
               a.download = `${document.getElementById('title').innerText}.png`
+              document.body.appendChild(a)
               a.click()
+              a.remove()
               document.getElementById('logo').style.display = "none"
               document.getElementById('genby').style.display = "none"
               document.getElementById('box').classList.add('box')
