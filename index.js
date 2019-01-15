@@ -3,6 +3,7 @@ const fileUpload = require('express-fileupload')
 const bodyParser = require('body-parser')
 const SusAnalyzer = require('sus-analyzer')
 const sus2image = require('sus-2-image')
+const { JSDOM } = require("jsdom")
 const app = express()
 
 app.use(bodyParser.urlencoded({ limit:'100mb',extended: true }))
@@ -19,7 +20,7 @@ app.post('/convert', async (req, res) => {
   if(!req.hasOwnProperty('files')) return res.redirect('/')
   const sus = req.files.sus.data.toString()
   const meta = SusAnalyzer.getMeta(sus)
-  const images = await sus2image.getPNGs(sus)
-
-  res.render('show',{meta: meta, images: images.map(i => "data:image/png;base64," + i.toString('base64')) })
+  const image = await sus2image.getSVG(sus)
+  const height = Number(new JSDOM(image).window.document.querySelector('svg').getAttribute('height').replace('px',''))
+  res.render('show',{meta: meta, image: image, height: height })
 })
