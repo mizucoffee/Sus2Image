@@ -5,6 +5,8 @@ const SusAnalyzer = require('sus-analyzer')
 const sus2image = require('sus-2-image')
 const fs = require('fs-extra')
 const uniqid = require('uniqid')
+const pug = require('pug')
+const puppeteer = require('puppeteer')
 const { JSDOM } = require("jsdom")
 const app = express()
 
@@ -23,9 +25,34 @@ app.post('/convert', async (req, res) => {
   const sus = req.files.sus.data.toString()
   const meta = SusAnalyzer.getMeta(sus)
   const image = await sus2image.getSVG(sus)
+  await sus2image.getPNG(sus)
   const height = Number(new JSDOM(image).window.document.querySelector('svg').getAttribute('height').replace('px',''))
   const id = uniqid.process()
   fs.ensureDirSync(`./public/svg/`)
+  fs.ensureDirSync(`./public/img/`)
   fs.writeFileSync(`./public/svg/${id}.svg` , image)
-  res.render('show',{meta: meta, image: id, height: height })
+
+  if (meta.DIFFICULTY == null) meta.DIFFICULTY = { BACKGROUND: '#e8f6e8', COLOR: '#19aa19', TEXT: 'BASIC' }
+
+  const html = pug.renderFile('frame.pug', {
+    height,
+    id,
+    meta
+  })
+
+  fs.writeFileSync(`./public/${id}.html`, html)
+
+  const browser = await puppeteer.launch({ args: ['--no-sandbox'] })
+  const page = await browser.newPage()
+  await page.goto(`http://localhost:3000/${id}.html`)
+
+  const clip = await page.evaluate(s => {
+    const { width, height, top: y, left: x } = document.querySelector(s).getBoundingClientRect()
+    return { width, height, x, y }
+  }, '#mainFrame')
+
+  await page.screenshot({ clip, path: `./public/img/${id}.png` })
+  fs.removeSync(`./public/${id}.html`)
+
+  res.render('show',{ meta: meta, id: id })
 })

@@ -29,6 +29,9 @@ html
           br
           | まあエゴサもしてるんで適当にツイートしていただければ対応します。
         h2 お知らせ
+        p 🎉🎉🎉1月17日の更新で1枚の画像を生成するようになりました🎉🎉🎉
+          br
+          | 右クリックメニューから保存出来るようになったよ！
         p 🎉🎉🎉1月15日の更新でロゴがダサくなりました🎉🎉🎉
           br
           | 特殊な分割数の譜面に対応したり、時間軸ベースになったりしました。
@@ -40,7 +43,9 @@ html
           br
           | 色々あってTypeScriptベースに進化しました。
         h2 既知のバグ
-        p 1月15日現在、既知のバグはありません。
+        p 1月17日現在、ロング系ノーツの終点にショートノーツを置いた状態でAIRを設置すると緑ノーツが設置されるというSeaurchinと違う挙動が報告されています（提供者：雫氏）。
+          br
+          | Seaurchinの挙動を確認して修正します。
         h2 アップロード
         form(action="/convert", method="post", enctype="multipart/form-data")
           input(type="text",placeholder="Select file" , disabled)#path.uk-input.uk-form-width-medium
