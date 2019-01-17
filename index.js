@@ -44,7 +44,7 @@ app.post('/convert', async (req, res) => {
 
   const browser = await puppeteer.launch({ args: ['--no-sandbox'] })
   const page = await browser.newPage()
-  await page.goto(`http://localhost:3000/${id}.html`)
+  await page.goto(`http://localhost:${process.env.PORT || 3000}/${id}.html`)
   await page.evaluateHandle('document.fonts.ready');
 
   const clip = await page.evaluate(s => {
