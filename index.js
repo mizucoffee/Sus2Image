@@ -53,6 +53,8 @@ app.post('/convert', async (req, res) => {
   }, '#mainFrame')
 
   await page.screenshot({ clip, path: `./public/img/${id}.png` })
+  await browser.close();
+
   fs.removeSync(`./public/${id}.html`)
 
   res.render('show',{ meta: meta, id: id })
