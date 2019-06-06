@@ -37,7 +37,8 @@ app.post('/convert', async (req, res) => {
   const html = pug.renderFile('frame.pug', {
     height,
     id,
-    meta
+    meta,
+    beats: SusAnalyzer.getScore(sus).BEATs[0]
   })
 
   fs.writeFileSync(`./public/${id}.html`, html)
